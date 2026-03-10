@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Birthday ❤️</title>
+
+<style>
+
+body{
+margin:0;
+font-family:'Segoe UI',sans-serif;
+background:linear-gradient(120deg,#f6d365,#fda085);
+color:white;
+text-align:center;
+overflow:hidden;
+}
+
+.container{
+margin-top:80px;
+}
+
+h1{
+font-size:45px;
+}
+
+p{
+font-size:20px;
+max-width:600px;
+margin:auto;
+}
+
+video{
+width:80%;
+border-radius:15px;
+margin-top:30px;
+cursor:pointer;
+box-shadow:0 10px 25px rgba(0,0,0,0.3);
+}
+
+.heart{
+position:absolute;
+color:red;
+font-size:20px;
+animation:float 6s linear infinite;
+}
+
+@keyframes float{
+0%{transform:translateY(100vh)}
+100%{transform:translateY(-10vh)}
+}
+
+.confetti{
+position:absolute;
+width:10px;
+height:10px;
+background:red;
+animation:fall 4s linear infinite;
+}
+
+@keyframes fall{
+0%{transform:translateY(-100px)}
+100%{transform:translateY(100vh)}
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>Happy Birthday My Love 🎂</h1>
+
+<p>
+Even though you are far away in Dubai,  
+your Jamun and Kutty Jamun love you so much ❤️  
+You are the best husband and the best Appa.
+</p>
+
+<video id="video" onclick="playFull()">
+<source src="birthday_video.mp4" type="video/mp4">
+</video>
+
+</div>
+
+<script>
+
+function playFull(){
+let v=document.getElementById("video")
+v.requestFullscreen()
+v.play()
+}
+
+for(let i=0;i<60;i++){
+
+let heart=document.createElement("div")
+heart.className="heart"
+heart.innerHTML="❤️"
+heart.style.left=Math.random()*100+"%"
+heart.style.animationDuration=(Math.random()*5+5)+"s"
+
+document.body.appendChild(heart)
+
+}
+
+for(let i=0;i<80;i++){
+
+let conf=document.createElement("div")
+conf.className="confetti"
+conf.style.left=Math.random()*100+"%"
+conf.style.background=`hsl(${Math.random()*360},100%,50%)`
+conf.style.animationDuration=(Math.random()*3+2)+"s"
+
+document.body.appendChild(conf)
+
+}
+
+</script>
+
+</body>
+</html>
