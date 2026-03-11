@@ -1,12 +1,10 @@
 <!DOCTYPE html>
-
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <title>Happy Birthday My Love</title>
 
 <style>
-
 body{
 margin:0;
 font-family:Arial, sans-serif;
@@ -16,21 +14,25 @@ overflow-y:auto;
 color:white;
 }
 
-/* section layout */
-
 .section{
 height:100vh;
 display:flex;
 flex-direction:column;
 justify-content:center;
 align-items:center;
+padding:20px;
 }
-
-/* title animation */
 
 h1{
 font-size:60px;
 animation:fade 3s infinite alternate;
+margin-bottom:20px;
+}
+
+.message{
+max-width:700px;
+font-size:22px;
+line-height:1.6;
 }
 
 @keyframes fade{
@@ -38,11 +40,9 @@ from{opacity:0.5}
 to{opacity:1}
 }
 
-/* scroll text */
-
 .scroll{
 font-size:22px;
-margin-top:20px;
+margin-top:40px;
 animation:bounce 2s infinite;
 }
 
@@ -50,8 +50,6 @@ animation:bounce 2s infinite;
 0%,100%{transform:translateY(0)}
 50%{transform:translateY(10px)}
 }
-
-/* heart */
 
 .heart{
 font-size:100px;
@@ -65,37 +63,21 @@ animation:beat 1s infinite;
 100%{transform:scale(1)}
 }
 
-/* fireworks canvas */
-
-#fireworks{
-position:fixed;
-top:0;
-left:0;
-width:100%;
-height:100%;
-pointer-events:none;
-display:none;
-}
-
-/* love message */
-
 #loveMessage{
 display:none;
-font-size:40px;
+font-size:36px;
 margin-top:20px;
-animation:fadeIn 2s;
 }
-
-@keyframes fadeIn{
-from{opacity:0}
-to{opacity:1}
-}
-
-/* video */
 
 #videoSection{
 display:none;
 margin-top:30px;
+}
+
+#finalMessage{
+display:none;
+font-size:40px;
+margin-top:40px;
 }
 
 iframe{
@@ -103,95 +85,100 @@ border-radius:15px;
 box-shadow:0 10px 30px rgba(0,0,0,0.4);
 }
 
-</style>
+#floatingHearts{
+position:fixed;
+bottom:0;
+left:0;
+width:100%;
+pointer-events:none;
+}
 
+.floatingHeart{
+position:absolute;
+font-size:30px;
+animation:floatHeart 4s linear infinite;
+}
+
+@keyframes floatHeart{
+0%{transform:translateY(0);opacity:1;}
+100%{transform:translateY(-600px);opacity:0;}
+}
+
+</style>
 </head>
 
 <body>
 
-<canvas id="fireworks"></canvas>
-
-<!-- first section -->
-
 <div class="section">
+
 <h1>🎉 Happy Birthday My Love ❤️</h1>
-<p class="scroll">Scroll Down For Your Surprise ↓</p>
+
+<div class="message">
+Today is not just your birthday… it is a day that reminds me how lucky I am to have you in my life.  
+You are not only my husband, but also my comfort, my biggest support, and the man who fills my days with love and laughter.
+
+You care about the smallest things about me, you make me feel safe, and you love our little family with your whole heart. Watching you become the most loving dad makes me fall in love with you even more every single day.
+
+Thank you for being patient with me, for understanding me, and for loving me in ways I never imagined. Our little one is so lucky to have a dad like you… and I am so lucky to have you as my life partner.
+
+On your special day, I just want you to know this — you are deeply loved, appreciated, and cherished more than words can say. ❤️
 </div>
 
-<!-- heart section -->
+<p class="scroll">Scroll Down For Your Surprise ↓</p>
+
+</div>
 
 <div class="section">
 
-<div class="heart" onclick="startSurprise()">❤️</div>
+<div class="heart" id="heartButton" onclick="startSurprise()">❤️</div>
 
 <h2>Click the Heart</h2>
 
-<div id="loveMessage">
-I Love You Forever ❤️
-</div>
+<div id="loveMessage">I Love You Forever ❤️</div>
 
 <div id="videoSection">
+<iframe id="videoFrame" width="400" height="700" src="" allow="autoplay" allowfullscreen></iframe>
+</div>
 
-<iframe id="videoFrame" width="400" height="700"
-src=""
-allow="autoplay"
-allowfullscreen>
-</iframe>
+<div id="finalMessage">💖 Best Dad & Best Husband 💖</div>
 
 </div>
 
-</div>
+<div id="floatingHearts"></div>
 
 <script>
 
 function startSurprise(){
 
-document.getElementById("loveMessage").style.display="block"
+document.getElementById("heartButton").style.display="none";
 
-document.getElementById("videoSection").style.display="block"
+document.getElementById("loveMessage").style.display="block";
 
-document.getElementById("videoFrame").src="https://www.youtube.com/embed/fQ47TuFPDIQ?autoplay=1"
+document.getElementById("videoSection").style.display="block";
 
-document.getElementById("fireworks").style.display="block"
+document.getElementById("videoFrame").src="https://www.youtube.com/embed/2Q9CCm5-sM4?autoplay=1";
 
-launchFireworks()
+setTimeout(showFinalMessage,60000);
+}
+
+function showFinalMessage(){
+
+document.getElementById("finalMessage").style.display="block";
+
+setInterval(createHeart,300);
 
 }
 
-/* simple fireworks */
+function createHeart(){
 
-const canvas=document.getElementById("fireworks")
-const ctx=canvas.getContext("2d")
+let heart=document.createElement("div");
+heart.className="floatingHeart";
+heart.innerHTML="💖";
+heart.style.left=Math.random()*100+"%";
 
-canvas.width=window.innerWidth
-canvas.height=window.innerHeight
+document.getElementById("floatingHearts").appendChild(heart);
 
-function launchFireworks(){
-
-setInterval(()=>{
-
-let x=Math.random()*canvas.width
-let y=Math.random()*canvas.height/2
-
-for(let i=0;i<50;i++){
-
-ctx.beginPath()
-
-ctx.arc(x+(Math.random()*100-50),y+(Math.random()*100-50),2,0,Math.PI*2)
-
-ctx.fillStyle=`hsl(${Math.random()*360},100%,50%)`
-
-ctx.fill()
-
-}
-
-setTimeout(()=>{
-
-ctx.clearRect(0,0,canvas.width,canvas.height)
-
-},500)
-
-},700)
+setTimeout(()=>heart.remove(),4000);
 
 }
 
