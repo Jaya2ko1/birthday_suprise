@@ -1,14 +1,89 @@
-<!-- Final message -->
-
-<div id="finalMessage" style="display:none; font-size:40px; margin-top:40px;">
-💖 Best Dad & Best Husband 💖
-</div>
-
-<!-- floating hearts -->
-
-<div id="floatingHearts"></div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Happy Birthday My Love</title>
 
 <style>
+body{
+margin:0;
+font-family:Arial, sans-serif;
+text-align:center;
+background:linear-gradient(to bottom,#ff9a9e,#fad0c4);
+overflow-y:auto;
+color:white;
+}
+
+.section{
+height:100vh;
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+padding:20px;
+}
+
+h1{
+font-size:60px;
+animation:fade 3s infinite alternate;
+margin-bottom:20px;
+}
+
+.message{
+max-width:700px;
+font-size:22px;
+line-height:1.6;
+}
+
+@keyframes fade{
+from{opacity:0.5}
+to{opacity:1}
+}
+
+.scroll{
+font-size:22px;
+margin-top:40px;
+animation:bounce 2s infinite;
+}
+
+@keyframes bounce{
+0%,100%{transform:translateY(0)}
+50%{transform:translateY(10px)}
+}
+
+.heart{
+font-size:100px;
+cursor:pointer;
+animation:beat 1s infinite;
+}
+
+@keyframes beat{
+0%{transform:scale(1)}
+50%{transform:scale(1.2)}
+100%{transform:scale(1)}
+}
+
+#loveMessage{
+display:none;
+font-size:36px;
+margin-top:20px;
+}
+
+#videoSection{
+display:none;
+margin-top:30px;
+}
+
+#finalMessage{
+display:none;
+font-size:40px;
+margin-top:40px;
+}
+
+iframe{
+border-radius:15px;
+box-shadow:0 10px 30px rgba(0,0,0,0.4);
+}
 
 #floatingHearts{
 position:fixed;
@@ -25,62 +100,89 @@ animation:floatHeart 4s linear infinite;
 }
 
 @keyframes floatHeart{
-0%{
-transform:translateY(0);
-opacity:1;
-}
-100%{
-transform:translateY(-600px);
-opacity:0;
-}
+0%{transform:translateY(0);opacity:1;}
+100%{transform:translateY(-600px);opacity:0;}
 }
 
 </style>
+</head>
+
+<body>
+
+<div class="section">
+
+<h1>🎉 Happy Birthday My Love ❤️</h1>
+
+<div class="message">
+Today is not just your birthday… it is a day that reminds me how lucky I am to have you in my life.  
+You are not only my husband, but also my comfort, my biggest support, and the man who fills my days with love and laughter.
+
+You care about the smallest things about me, you make me feel safe, and you love our little family with your whole heart. Watching you become the most loving dad makes me fall in love with you even more every single day.
+
+Thank you for being patient with me, for understanding me, and for loving me in ways I never imagined. Our little one is so lucky to have a dad like you… and I am so lucky to have you as my life partner.
+
+On your special day, I just want you to know this — you are deeply loved, appreciated, and cherished more than words can say. ❤️
+</div>
+
+<p class="scroll">Scroll Down For Your Surprise ↓</p>
+
+</div>
+
+<div class="section">
+
+<div class="heart" id="heartButton" onclick="startSurprise()">❤️</div>
+
+<h2>Click the Heart</h2>
+
+<div id="loveMessage">I Love You Forever ❤️</div>
+
+<div id="videoSection">
+<iframe id="videoFrame" width="400" height="700" src="" allow="autoplay" allowfullscreen></iframe>
+</div>
+
+<div id="finalMessage">💖 Best Dad & Best Husband 💖</div>
+
+</div>
+
+<div id="floatingHearts"></div>
 
 <script>
 
 function startSurprise(){
 
-document.getElementById("heartButton").style.display="none"
+document.getElementById("heartButton").style.display="none";
 
-document.getElementById("loveMessage").style.display="block"
+document.getElementById("loveMessage").style.display="block";
 
-document.getElementById("videoSection").style.display="block"
+document.getElementById("videoSection").style.display="block";
 
-document.getElementById("videoFrame").src="https://www.youtube.com/embed/fQ47TuFPDIQ?autoplay=1"
+document.getElementById("videoFrame").src="https://www.youtube.com/embed/fQ47TuFPDIQ?autoplay=1";
 
-document.getElementById("fireworks").style.display="block"
-
-launchFireworks()
-
-// show final message after video (adjust seconds if needed)
-
-setTimeout(showFinalMessage,60000)
-
+setTimeout(showFinalMessage,60000);
 }
 
 function showFinalMessage(){
 
-document.getElementById("finalMessage").style.display="block"
+document.getElementById("finalMessage").style.display="block";
 
-setInterval(createHeart,300)
+setInterval(createHeart,300);
 
 }
 
 function createHeart(){
 
-let heart=document.createElement("div")
+let heart=document.createElement("div");
+heart.className="floatingHeart";
+heart.innerHTML="💖";
+heart.style.left=Math.random()*100+"%";
 
-heart.className="floatingHeart"
+document.getElementById("floatingHearts").appendChild(heart);
 
-heart.innerHTML="💖"
-
-heart.style.left=Math.random()*100+"%"
-
-document.getElementById("floatingHearts").appendChild(heart)
-
-setTimeout(()=>heart.remove(),4000)
+setTimeout(()=>heart.remove(),4000);
 
 }
 
 </script>
+
+</body>
+</html>
